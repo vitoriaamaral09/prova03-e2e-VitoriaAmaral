@@ -11,7 +11,6 @@ test.use({
 });
 
 test.describe('Contato NaMesa', () => {
-
   const CONFIG = join(__dirname, '../support/fixtures/config.yml');
 
   let namesaContatoPage: NamesaContatoPage;
@@ -22,11 +21,11 @@ test.describe('Contato NaMesa', () => {
 
   test.beforeEach(async ({ page }) => {
     namesaContatoPage = new NamesaContatoPage(page);
+
     await page.goto(BASE_URL);
   });
 
   test('Preencher formulario de contato', async ({ page }) => {
-
     await namesaContatoPage.preencherFormulario();
 
     await namesaContatoPage.validarFormularioPreenchido();
@@ -35,7 +34,6 @@ test.describe('Contato NaMesa', () => {
   });
 
   test('Validar campos obrigatorios vazios', async ({ page }) => {
-
     await namesaContatoPage.enviarFormularioVazio();
 
     await namesaContatoPage.validarMensagemErro();
@@ -44,12 +42,10 @@ test.describe('Contato NaMesa', () => {
   });
 
   test('Validar email invalido', async ({ page }) => {
-
     await namesaContatoPage.preencherEmailInvalido();
 
     await namesaContatoPage.validarMensagemErro();
 
     await page.waitForTimeout(2000);
   });
-
 });

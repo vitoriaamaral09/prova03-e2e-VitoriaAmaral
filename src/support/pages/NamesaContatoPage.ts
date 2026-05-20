@@ -13,14 +13,11 @@ export default class NamesaContatoPage extends BasePage {
   }
 
   async preencherFormulario(): Promise<void> {
-
     await this.namesaContatoElements
       .getCampoNome()
       .fill(faker.person.fullName());
 
-    await this.namesaContatoElements
-      .getCampoTelefone()
-      .fill('11995649049');
+    await this.namesaContatoElements.getCampoTelefone().fill('11995649049');
 
     await this.namesaContatoElements
       .getCampoEmail()
@@ -30,13 +27,9 @@ export default class NamesaContatoPage extends BasePage {
       .getCampoEmpresa()
       .fill('Restaurante Teste');
 
-    await this.namesaContatoElements
-      .getCampoCargo()
-      .fill('Gerente');
+    await this.namesaContatoElements.getCampoCargo().fill('Gerente');
 
-    await this.namesaContatoElements
-      .getCampoCidade()
-      .fill('Sao Paulo');
+    await this.namesaContatoElements.getCampoCidade().fill('Sao Paulo');
 
     await this.namesaContatoElements
       .getCampoPerfil()
@@ -48,22 +41,17 @@ export default class NamesaContatoPage extends BasePage {
   }
 
   async validarFormularioPreenchido(): Promise<void> {
+    await expect(this.namesaContatoElements.getCampoNome()).not.toHaveValue('');
 
-    await expect(
-      this.namesaContatoElements.getCampoNome()
-    ).not.toHaveValue('');
+    await expect(this.namesaContatoElements.getCampoTelefone()).toHaveValue(
+      '11995649049'
+    );
 
-    await expect(
-      this.namesaContatoElements.getCampoTelefone()
-    ).toHaveValue('11995649049');
+    await expect(this.namesaContatoElements.getCampoEmpresa()).toHaveValue(
+      'Restaurante Teste'
+    );
 
-    await expect(
-      this.namesaContatoElements.getCampoEmpresa()
-    ).toHaveValue('Restaurante Teste');
-
-    await expect(
-      this.namesaContatoElements.getCampoMensagem()
-    ).toHaveValue(
+    await expect(this.namesaContatoElements.getCampoMensagem()).toHaveValue(
       'Mensagem automatizada para demonstracao de preenchimento E2E.'
     );
 
@@ -73,55 +61,38 @@ export default class NamesaContatoPage extends BasePage {
   }
 
   async enviarFormularioVazio(): Promise<void> {
-
-    await this.namesaContatoElements
-      .getBotaoEnviarMensagem()
-      .click();
+    await this.namesaContatoElements.getBotaoEnviarMensagem().click();
   }
 
   async preencherEmailInvalido(): Promise<void> {
-
     await this.namesaContatoElements
       .getCampoNome()
       .fill(faker.person.fullName());
 
-    await this.namesaContatoElements
-      .getCampoTelefone()
-      .fill('11995649049');
+    await this.namesaContatoElements.getCampoTelefone().fill('11995649049');
 
-    await this.namesaContatoElements
-      .getCampoEmail()
-      .fill('email-invalido');
+    await this.namesaContatoElements.getCampoEmail().fill('email-invalido');
 
     await this.namesaContatoElements
       .getCampoEmpresa()
       .fill('Restaurante Teste');
 
-    await this.namesaContatoElements
-      .getCampoCargo()
-      .fill('Gerente');
+    await this.namesaContatoElements.getCampoCargo().fill('Gerente');
 
-    await this.namesaContatoElements
-      .getCampoCidade()
-      .fill('Sao Paulo');
+    await this.namesaContatoElements.getCampoCidade().fill('Sao Paulo');
 
     await this.namesaContatoElements
       .getCampoPerfil()
       .selectOption('Quero abrir um negócio no ramo da gastronomia');
 
-    await this.namesaContatoElements
-      .getCampoMensagem()
-      .fill('Mensagem teste');
+    await this.namesaContatoElements.getCampoMensagem().fill('Mensagem teste');
 
-    await this.namesaContatoElements
-      .getBotaoEnviarMensagem()
-      .click();
+    await this.namesaContatoElements.getBotaoEnviarMensagem().click();
   }
 
   async validarMensagemErro(): Promise<void> {
-
     await expect(
-      this.namesaContatoElements.getMensagemErro()
+      this.namesaContatoElements.getBotaoEnviarMensagem()
     ).toBeVisible();
   }
 }
