@@ -4,13 +4,11 @@ import { TheConfig } from 'sicolo';
 import NamesaContatoPage from '../support/pages/NamesaContatoPage';
 
 test.use({
-  headless: false,
-  launchOptions: {
-    slowMo: 500
-  }
+  headless: true
 });
 
 test.describe('Contato NaMesa', () => {
+
   const CONFIG = join(__dirname, '../support/fixtures/config.yml');
 
   let namesaContatoPage: NamesaContatoPage;
@@ -20,32 +18,31 @@ test.describe('Contato NaMesa', () => {
     .retrieveData();
 
   test.beforeEach(async ({ page }) => {
+
     namesaContatoPage = new NamesaContatoPage(page);
 
     await page.goto(BASE_URL);
   });
 
   test('Preencher formulario de contato', async ({ page }) => {
+
     await namesaContatoPage.preencherFormulario();
 
     await namesaContatoPage.validarFormularioPreenchido();
-
-    await page.waitForTimeout(2000);
   });
 
   test('Validar campos obrigatorios vazios', async ({ page }) => {
+
     await namesaContatoPage.enviarFormularioVazio();
 
     await namesaContatoPage.validarMensagemErro();
-
-    await page.waitForTimeout(2000);
   });
 
   test('Validar email invalido', async ({ page }) => {
+
     await namesaContatoPage.preencherEmailInvalido();
 
     await namesaContatoPage.validarMensagemErro();
-
-    await page.waitForTimeout(2000);
   });
+
 });
