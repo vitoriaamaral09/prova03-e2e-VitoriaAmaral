@@ -44,4 +44,8 @@ export default class NamesaContatoElements extends BaseElements {
       hasText: 'Enviar mensagem'
     });
   }
+
+  getMensagemErro(): Locator {
+    return this.page.locator('.hs-error-msg');
+  }
 }
